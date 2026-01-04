@@ -28,17 +28,23 @@
                 <div class="divide-y divide-gray-100">
                     <div v-for="monitor in group.monitors" :key="monitor.id" class="p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div :class="getStatusColor(monitor.state.status)" class="w-4 h-4 rounded-full"></div>
-                                <div>
-                                    <h3 class="text-lg font-medium text-gray-900">
-                                        <a v-if="monitor.display.public_link" :href="monitor.url" target="_blank" class="hover:underline">{{ monitor.name }}</a>
-                                        <span v-else>{{ monitor.name }}</span>
-                                    </h3>
-                                    <div class="text-sm text-gray-500 space-x-2">
-                                        <span v-for="tag in monitor.tags" :key="tag" class="bg-gray-100 px-2 py-0.5 rounded text-xs">{{ tag }}</span>
-                                    </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2.5 h-2.5 rounded-full" :class="getStatusColor(monitor.state.status)"></div>
+                                <div class="font-medium text-gray-700">
+                                    {{ monitor.name }}
+                                    <span v-if="monitor.tags" class="ml-2 inline-flex space-x-1">
+                                        <span v-for="tag in monitor.tags" :key="typeof tag === 'string' ? tag : tag.name"
+                                            class="px-2 py-0.5 rounded text-[0.7em] text-white font-bold"
+                                            :style="{ backgroundColor: (typeof tag === 'object' && tag.color) ? tag.color : '#6b7280' }">
+                                            {{ typeof tag === 'string' ? tag : tag.name }}
+                                        </span>
+                                    </span>
                                 </div>
+                                <a v-if="monitor.display?.public_link" :href="monitor.url" target="_blank" class="text-gray-400 hover:text-gray-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                </a>
                             </div>
                             <div class="text-right">
                                 <div class="text-sm font-bold" :class="getStatusTextColor(monitor.state.status)">

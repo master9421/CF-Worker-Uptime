@@ -15,7 +15,9 @@ groups:
     monitors:
       - id: "uptimekuma"
         name: "UptimeKuma"
-        tag: ["Monitor"]
+        tags: 
+          - name: "Zeabur"
+            color: "#6300FF"
         type: "http"
         url: "https://acofork-uptime.zeabur.app/status/acofork"
         method: "HEAD"

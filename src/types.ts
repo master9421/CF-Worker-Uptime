@@ -14,6 +14,14 @@ export const DisplaySchema = z.object({
   public_link: z.boolean().default(false),
 });
 
+export const TagSchema = z.union([
+  z.string(), // Simple string tag "Production"
+  z.object({  // Object tag with color
+    name: z.string(),
+    color: z.string().optional(), // Hex code or CSS color
+  })
+]);
+
 export const MonitorSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -25,7 +33,7 @@ export const MonitorSchema = z.object({
   timeout: z.number().default(5000),
   expected_latency: z.number().default(1000),
   grace_period: z.number().default(3),
-  tags: z.array(z.string()).optional(),
+  tags: z.array(TagSchema).optional(),
   display: DisplaySchema.default({}),
   validation: ValidationSchema.optional(),
 });
