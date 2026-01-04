@@ -16,14 +16,14 @@ export async function sendNotification(
   const emoji = status === 'UP' ? '✅' : (status === 'DOWN' ? '🔴' : '⚠️');
   
   const MSG = `
-${emoji} Status Change Notification
+${emoji} **Status Change Notification**
 
-📌 Service: ${monitor.name}
-🆔 ID: ${monitor.id}
-🔗 URL: ${monitor.url}
-📊 Status: ${status}
-📝 Message: ${message}
-⏰ Time: ${time}
+📌 **Service**: ${monitor.name}
+🆔 **ID**: ${monitor.id}
+🔗 **URL**: ${monitor.url}
+📊 **Status**: ${status}
+📝 **Message**: ${message}
+⏰ **Time**: ${time}
 `.trim();
 
   // ---------------------------------------------------------------------------

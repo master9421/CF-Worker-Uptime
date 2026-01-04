@@ -4,6 +4,9 @@ settings:
   title: "Acofork System Status"
   callback_url: ""
   callback_secret: ""
+  # If true, only send notifications when status changes to DOWN.
+  # DEGRADED or UP (recovery) events will NOT trigger notifications.
+  notification_on_down_only: true 
 
 groups:
   - id: "services"
@@ -227,6 +230,16 @@ groups:
         timeout: 5000
         expected_latency: 1000
         grace_period: 3
+        display:
+          chart: true
+          public_link: false
+
+      - id: "fail_ssh"
+        name: "fail_ssh"
+        type: "tcp"
+        url: "192.168.124.14:22"
+        timeout: 5000
+        expected_latency: 1000
         display:
           chart: true
           public_link: false

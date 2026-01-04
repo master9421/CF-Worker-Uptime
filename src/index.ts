@@ -143,7 +143,12 @@ async function handleScheduled(event: ScheduledEvent, env: Env, ctx: ExecutionCo
 
     // 5. Notifications
     if (prevState && prevState.status !== newStatus) {
-      await sendNotification(env, config, monitor, newStatus, checkResult.message || 'Status Changed');
+      // Check notification policy
+      const shouldNotify = !config.settings.notification_on_down_only || newStatus === 'DOWN';
+      
+      if (shouldNotify) {
+        await sendNotification(config, monitor, newStatus, checkResult.message || 'Status Changed', env);
+      }
     }
   }));
 }

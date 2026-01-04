@@ -41,6 +41,7 @@ export const ConfigSchema = z.object({
     title: z.string(),
     callback_url: z.string().optional(),
     callback_secret: z.string().optional(),
+    notification_on_down_only: z.boolean().default(false),
   }),
   groups: z.array(GroupSchema),
 });
