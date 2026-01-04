@@ -45,8 +45,19 @@ app.get('/api/status', async (c) => {
   const states = await db.getAllMonitorStates();
   const stateMap = new Map(states.map(s => [s.monitor_id, s]));
 
-  // Get recent history for status bars (last 30 checks ~ 30 minutes if checked every minute)
-  const allHistory = await db.getRecentHistory(30);
+  // Handle range parameter
+  const range = c.req.query('range') || '24h'; // Default to 24h
+  let allHistory: any[] = [];
+
+  if (range === '30m') {
+    allHistory = await db.getRecentHistory(30);
+  } else if (range === '24h' || range === '7d' || range === '14d') {
+    allHistory = await db.getAggregatedHistory(range);
+  } else {
+    // Fallback
+    allHistory = await db.getRecentHistory(30);
+  }
+
   const historyMap = new Map<string, any[]>();
   
   allHistory.forEach(h => {
