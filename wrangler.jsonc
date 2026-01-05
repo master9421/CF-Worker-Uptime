@@ -1,51 +1,49 @@
 {
-	// Worker 基本信息
-	"name": "uptime-monitor",
-	"main": "src/index.ts",
-	"compatibility_date": "2024-01-01",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
-	// Cron 触发器（每分钟执行一次）
-	"triggers": {
-		"crons": [
-			"* * * * *"
-		]
-	},
-	// D1 数据库绑定
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "uptime-db",
-			"database_id": "33a3152b-c4df-41b6-8b6a-66c621090b3a",
-			"remote": true
-		},
-	],
-	// 模块规则：允许将 YAML 和 HTML 作为文本导入
-	"rules": [
-		{
-			"type": "Text",
-			"globs": [
-				"**/*.yaml",
-				"**/*.html"
-			],
-			"fallthrough": true
-		}
-	],
-	// 可观测性配置
-	"observability": {
-		"enabled": false,
-		"head_sampling_rate": 1,
-		"logs": {
-			"enabled": true,
-			"head_sampling_rate": 1,
-			"persist": true,
-			"invocation_logs": true
-		},
-		"traces": {
-			"enabled": false,
-			"persist": true,
-			"head_sampling_rate": 1
-		}
-	}
+  // Worker 基本信息
+  "name": "uptime-monitor",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Cron 触发器（每分钟执行一次）
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
+
+  // D1 数据库绑定
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "uptime-db",
+      "database_id": "33a3152b-c4df-41b6-8b6a-66c621090b3a"
+    }
+  ],
+
+  // 模块规则：允许将 YAML 和 HTML 作为文本导入
+  "rules": [
+    {
+      "type": "Text",
+      "globs": ["**/*.yaml", "**/*.html"],
+      "fallthrough": true
+    }
+  ],
+
+  // 可观测性配置
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
+  }
 }
