@@ -47,7 +47,7 @@ settings:
       label: "Self-Hosted"
       color: "#4B5563"
 
-incidents:
+#incidents:
 #   - id: "maintenance-001"
 #     title: "Database Migration"
 #     type: "scheduled" # scheduled, routine, incident
